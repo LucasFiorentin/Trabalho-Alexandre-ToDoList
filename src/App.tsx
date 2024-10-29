@@ -46,53 +46,53 @@ export function TodoPage() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <h1 className="text-2xl font-bold">Carregando...</h1>
+      <div className="flex justify-center items-center h-screen bg-gray-50">
+        <h1 className="text-3xl font-semibold text-gray-600">Carregando...</h1>
       </div>
     )
   }
 
   if (error) {
     return (
-      <h1 className="text-2xl font-bold text-red-500 text-center">
+      <h1 className="text-2xl font-semibold text-red-600 text-center mt-10">
         Erro ao carregar os dados
       </h1>
     )
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-md bg-white shadow-lg rounded-lg">
-      <p className="text-4xl font-bold mb-6 text-center text-red-600">
-        Todo List
-      </p>
+    <div className="container mx-auto p-10 max-w-lg bg-blue-50 shadow-2xl rounded-3xl border border-blue-200">
+      <h1 className="text-5xl font-extrabold mb-12 text-center text-teal-500">
+        Mnha lista
+      </h1>
 
-      <div className="flex space-x-2 mb-6">
+      <div className="flex justify-center items-center space-x-3 mb-8">
         <input
           type="text"
-          placeholder="Adicionar uma nova tarefa"
+          placeholder="digite a nova atividade"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="flex-1 px-5 py-4 text-lg border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-300 transition duration-200"
         />
         <button
           onClick={handleAddTodo}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+          className="px-6 py-4 bg-teal-500 text-white font-semibold rounded-xl hover:bg-teal-600 transition duration-200 text-lg"
         >
-          Adicionar
+          Add
         </button>
       </div>
 
-      <ul className="space-y-2">
+      <ul className="space-y-5">
         {data?.map((todo) => (
           <li
             key={todo?.id}
-            className="flex items-center justify-between p-4 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition-colors"
+            className="flex items-center justify-between p-6 bg-white rounded-2xl shadow-lg border-l-4 border-teal-400 transition transform hover:scale-105"
           >
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-5">
               <input
                 type="checkbox"
                 checked={todo?.marcado}
-                className="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                className="h-7 w-7 text-teal-500 focus:ring-teal-400 border-gray-300 rounded-full"
                 onChange={() => {
                   if (todo) {
                     handleToggleTodo(todo?.id ?? '', todo?.marcado ?? false)
@@ -100,20 +100,20 @@ export function TodoPage() {
                 }}
               />
               <label
-                className={`text-base font-medium ${
-                  todo?.marcado ? 'line-through text-gray-500' : 'text-gray-800'
+                className={`text-lg font-semibold ${
+                  todo?.marcado ? 'line-through text-gray-400' : 'text-gray-700'
                 }`}
               >
                 {todo?.text}
               </label>
             </div>
             <button
-              className="text-gray-400 hover:text-red-500 transition-colors"
+              className="text-gray-400 hover:text-red-500 transition duration-150 transform hover:scale-110"
               onClick={() => {
                 handleDeleteTodo(todo?.id ?? '')
               }}
             >
-              <Trash className="h-5 w-5" />
+              <Trash className="h-7 w-7" />
             </button>
           </li>
         ))}
